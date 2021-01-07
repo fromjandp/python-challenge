@@ -11,7 +11,7 @@ months = []
 pnl = []
 
 # Set up the path to find the .csv file to be used with the program.
-csvpath = os.path.join("Resources", "budget1_data.csv")
+csvpath = os.path.join("Resources", "budget_data.csv")
 print(csvpath)
 
 with open(csvpath, 'r') as csvfile:
@@ -27,27 +27,28 @@ with open(csvpath, 'r') as csvfile:
     total_months = int(0)
     total = 0
     # variables used for calculating the average change
+    first_time_through = "false"
     value1 =  int(0)
     value2 =  int(0)
     value_difference = int(0)
     difference_totals = int(0)
     average_change = float(0)
 
-
-    monthly_difference1= int(0)
-    monthly_difference2 = int(0)
-    monthly_difference_results = int(0)
-    comparison_value = int(0)
-    comparison_difference = int(0)
-    
-    net_total = float(0)
-    total_net_pnl = float(0)
-    total = float(0)
-    average_change = float(0)
+    #variables used for the greatest increase and the greatest decrease
     greatest_increase = int(0)
     greatest_decrease = int(0)
-    first_time_through = "false"
-    answer = 0
+
+   
+
+    # monthly_difference1= int(0)
+    # monthly_difference2 = int(0)
+    # monthly_difference_results = int(0)
+    # comparison_value = int(0)
+    # comparison_difference = int(0)
+    
+    # net_total = float(0)
+    # total_net_pnl = float(0)
+    # total = float(0)
 
     # Read the input file 'budget_data.csv' and process.
     for row in csvreader:
@@ -82,14 +83,27 @@ with open(csvpath, 'r') as csvfile:
 
             print("Diffence total = " + str(difference_totals))
 
-
+            if value_difference > greatest_increase:
+                greatest_increase = value_difference
+                print("value_difference = : " + str(greatest_increase))
         
+            if value_difference < greatest_decrease:
+                greatest_decrease = value_difference
+                
+
+
+print("final gi: " + str(greatest_increase))
+print("final gd " + str(greatest_decrease))  
+
 
 #round to eliminate the decimal point     
 total = round(total) 
 
 # calculation for average change from month to month
 average_change = difference_totals / (total_months - 1)
+
+#round average_change to 2 decimal places
+average_change = round(average_change,2)
 
         
         # Print out the totals
@@ -98,6 +112,5 @@ print(f'-----------------------------total_months-----------------')
 print(f'Total Months: {total_months}')
 print(f'Total: {total}')
 print(f'Average Change: {average_change}')
-print(f'Greatest Increase in Profits: ')
-
-print(f'Greatest Decrease in profits')
+print(f'Greatest Increase in Profits:  {greatest_increase}')
+print(f'Greatest Decrease in profits:  {greatest_decrease}')
