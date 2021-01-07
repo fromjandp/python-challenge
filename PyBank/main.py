@@ -11,7 +11,7 @@ months = []
 pnl = []
 
 # Set up the path to find the .csv file to be used with the program.
-csvpath = os.path.join("Resources", "budget_data.csv")
+csvpath = os.path.join("Resources", "budget1_data.csv")
 print(csvpath)
 
 with open(csvpath, 'r') as csvfile:
@@ -26,6 +26,19 @@ with open(csvpath, 'r') as csvfile:
     
     total_months = int(0)
     total = 0
+    # variables used for calculating the average change
+    value1 =  int(0)
+    value2 =  int(0)
+    value_difference = int(0)
+    difference_totals = int(0)
+    average_change = float(0)
+
+
+    monthly_difference1= int(0)
+    monthly_difference2 = int(0)
+    monthly_difference_results = int(0)
+    comparison_value = int(0)
+    comparison_difference = int(0)
     
     net_total = float(0)
     total_net_pnl = float(0)
@@ -33,32 +46,58 @@ with open(csvpath, 'r') as csvfile:
     average_change = float(0)
     greatest_increase = int(0)
     greatest_decrease = int(0)
+    first_time_through = "false"
+    answer = 0
 
     # Read the input file 'budget_data.csv' and process.
     for row in csvreader:
-        total = round(total +  int(row[1]))
-
+    
         # Accumulate the dates in an array called 'months'
         months.append(row[0])
 
         # Accumulate the profit/loss values, for the total in a list called 'pnl'.
         pnl.append(row[1])
-
-        pnl.append(row[1])
-
+        
         # Accumulate the number of months in the dataset.
         total_months += 1
+        total = total +  int(row[1])
 
-        # Accumulate the net total amount of "Profit/Loss" over the entire period.
-        #  net_total = net_total + row[1]
+        if first_time_through == "false":
+            # the profit/loss value is needed but there is nothing to compare it to until the next record is read in.
+            value1 = int(row[1])
+            print("value1 from first time: " + str(value2))
+            first_time_through = "true"
+        else:
+            # old month value
+            value2 = value1
+            print("value1: " + str(value1))
+            #new month value
+            value1 = int(row[1])
+            # subtract old from new to get the change between each month
+            value_difference =  value1 -  value2
+            print("V1=  " + str(value1) + " V2= : " + str(value2))
+            # add to total of monthly differences
+            difference_totals = difference_totals + value_difference
+            print("difference between V1 - V2 = " + str(value_difference))
+
+            print("Diffence total = " + str(difference_totals))
 
 
-# Print out the totals
-print(f'Financial Analysis')
+        
+
+#round to eliminate the decimal point     
+total = round(total) 
+
+# calculation for average change from month to month
+average_change = difference_totals / (total_months - 1)
+
+        
+        # Print out the totals
+print(f'Financial Analysis') 
 print(f'-----------------------------total_months-----------------')
 print(f'Total Months: {total_months}')
 print(f'Total: {total}')
-print(f'Average Change: ')
+print(f'Average Change: {average_change}')
 print(f'Greatest Increase in Profits: ')
 
 print(f'Greatest Decrease in profits')
