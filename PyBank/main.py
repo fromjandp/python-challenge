@@ -1,7 +1,7 @@
-# Import the  nodule  to allow for Python to be able to use across machine operating systems
+# Import the module  to allow for Python to be able to use across machine operating systems
 import os
 
-# Import the Module to read csv files in the program
+# Import the module to read csv files in the program
 import csv
 
 # Initialize the lists to be used to hold values during the program
@@ -87,13 +87,27 @@ average_change = difference_totals / (total_months - 1)
 #round average_change to 2 decimal places
 average_change = round(average_change,2)
 
-#outpath = os.path.join(“Analysis”, “budget_data_analysis.txt”)
-        
 # Print out the totals to the display screen
 print(f'Financial Analysis') 
-print(f'-----------------------------total_months-----------------')
+print(f'---------------------------')
 print(f'Total Months: {total_months}')
 print(f'Total: {total}')
 print(f'Average Change: {average_change}')
 print(f'Greatest Increase in Profits:  {greatest_increase_month} (${greatest_increase})')
 print(f'Greatest Decrease in profits:  {greatest_decrease_month} (${greatest_decrease})')
+
+
+# Print to a text file - Note:  researched on the web and found some in information, on stackoverflow, which makes sense to me.
+# https://stackoverflow.com/questions/36571560/directing-print-output-to-a-txt-file
+
+output_file = os.path.join("Analysis","budget_data_analysis.txt")
+with open("budget_data_analysis.txt", "w") as text_file:  
+    print("Financial Analysis", file=open("budget_data_analysis.txt", "w"))
+    print("-----------------------------",  file=open("budget_data_analysis.txt", "a"))
+    print("Total Months:", total_months, file=open("budget_data_analysis.txt", "a"))
+    print("Total:", total, file=open("budget_data_analysis.txt", "a"))
+    print("Average Change:", average_change, file=open("budget_data_analysis.txt", "a"))
+    print("Greatest Increase in Profits:", greatest_increase_month, "($",greatest_increase,")", file=open("budget_data_analysis.txt", "a"))
+    print("Greatest Decrease in Profits:", greatest_decrease_month, "($",greatest_decrease,")", file=open("budget_data_analysis.txt", "a"))
+   
+
