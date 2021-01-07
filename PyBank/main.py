@@ -12,7 +12,6 @@ pnl = []
 
 # Set up the path to find the .csv file to be used with the program.
 csvpath = os.path.join("Resources", "budget_data.csv")
-print(csvpath)
 
 with open(csvpath, 'r') as csvfile:
     #   CSV  reader specifies delimiter and variable that holds contents
@@ -22,7 +21,7 @@ with open(csvpath, 'r') as csvfile:
     csv_header = next(csvreader)
 
     #  Read each row of data after the header
-#  initialize variables to hold calculations and output totals.
+    #  initialize variables to hold calculations and output totals.
     
     total_months = int(0)
     total = 0
@@ -38,17 +37,9 @@ with open(csvpath, 'r') as csvfile:
     greatest_increase = int(0)
     greatest_decrease = int(0)
 
-   
-
-    # monthly_difference1= int(0)
-    # monthly_difference2 = int(0)
-    # monthly_difference_results = int(0)
-    # comparison_value = int(0)
-    # comparison_difference = int(0)
-    
-    # net_total = float(0)
-    # total_net_pnl = float(0)
-    # total = float(0)
+    #variales used to hold the month during which the greatest increate and the greatest decrease occurred
+    greatest_increase_month = ""
+    greatest_decrease_month = ""
 
     # Read the input file 'budget_data.csv' and process.
     for row in csvreader:
@@ -57,45 +48,36 @@ with open(csvpath, 'r') as csvfile:
         months.append(row[0])
 
         # Accumulate the profit/loss values, for the total in a list called 'pnl'.
-        pnl.append(row[1])
-        
+        pnl.append(row[0]) 
+                
         # Accumulate the number of months in the dataset.
         total_months += 1
-        total = total +  int(row[1])
-
+        total = total + int(row[1])
+    
         if first_time_through == "false":
             # the profit/loss value is needed but there is nothing to compare it to until the next record is read in.
             value1 = int(row[1])
-            print("value1 from first time: " + str(value2))
             first_time_through = "true"
         else:
-            # old month value
+            # old month profit/loss value
             value2 = value1
-            print("value1: " + str(value1))
-            #new month value
+            #new month profit/loss value
             value1 = int(row[1])
             # subtract old from new to get the change between each month
             value_difference =  value1 -  value2
-            print("V1=  " + str(value1) + " V2= : " + str(value2))
             # add to total of monthly differences
             difference_totals = difference_totals + value_difference
-            print("difference between V1 - V2 = " + str(value_difference))
 
-            print("Diffence total = " + str(difference_totals))
-
+            # Determine the greatest increase
             if value_difference > greatest_increase:
                 greatest_increase = value_difference
-                print("value_difference = : " + str(greatest_increase))
-        
+                greatest_increase_month = str(row[0])
+                                    
+            # Determine the greates decrease                        
             if value_difference < greatest_decrease:
                 greatest_decrease = value_difference
-                
-
-
-print("final gi: " + str(greatest_increase))
-print("final gd " + str(greatest_decrease))  
-
-
+                greatest_decrease_month = str(row[0])
+        
 #round to eliminate the decimal point     
 total = round(total) 
 
@@ -105,12 +87,13 @@ average_change = difference_totals / (total_months - 1)
 #round average_change to 2 decimal places
 average_change = round(average_change,2)
 
+#outpath = os.path.join(“Analysis”, “budget_data_analysis.txt”)
         
-        # Print out the totals
+# Print out the totals to the display screen
 print(f'Financial Analysis') 
 print(f'-----------------------------total_months-----------------')
 print(f'Total Months: {total_months}')
 print(f'Total: {total}')
 print(f'Average Change: {average_change}')
-print(f'Greatest Increase in Profits:  {greatest_increase}')
-print(f'Greatest Decrease in profits:  {greatest_decrease}')
+print(f'Greatest Increase in Profits:  {greatest_increase_month} (${greatest_increase})')
+print(f'Greatest Decrease in profits:  {greatest_decrease_month} (${greatest_decrease})')
