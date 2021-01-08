@@ -101,13 +101,11 @@ print(f'Greatest Decrease in profits:  {greatest_decrease_month} (${greatest_dec
 # https://stackoverflow.com/questions/36571560/directing-print-output-to-a-txt-file
 
 output_file = os.path.join("Analysis","budget_data_analysis.txt")
-with open("budget_data_analysis.txt", "w") as text_file:  
-    print("Financial Analysis", file=open("budget_data_analysis.txt", "w"))
-    print("-----------------------------",  file=open("budget_data_analysis.txt", "a"))
-    print("Total Months:", total_months, file=open("budget_data_analysis.txt", "a"))
-    print("Total:", total, file=open("budget_data_analysis.txt", "a"))
-    print("Average Change:", average_change, file=open("budget_data_analysis.txt", "a"))
-    print("Greatest Increase in Profits:", greatest_increase_month, "($",greatest_increase,")", file=open("budget_data_analysis.txt", "a"))
-    print("Greatest Decrease in Profits:", greatest_decrease_month, "($",greatest_decrease,")", file=open("budget_data_analysis.txt", "a"))
-   
-
+with open(output_file, "w") as text_file:  
+    print("Financial Analysis", file=open(output_file, "w"))
+    print("-----------------------------",  file=open(output_file, "a"))
+    print("Total Months:", total_months, file=open(output_file, "a"))
+    print("Total:", total, file=open(output_file, "a"))
+    print("Average Change:", average_change, file=open(output_file, "a"))
+    print("Greatest Increase in Profits:", greatest_increase_month, "($",greatest_increase,")", file=open(output_file, "a"))
+    print("Greatest Decrease in Profits:", greatest_decrease_month, "($",greatest_decrease,")", file=open(output_file, "a"))
