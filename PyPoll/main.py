@@ -12,6 +12,12 @@ voter_id = []
 county = []
 candidate = []
 
+#Winner
+winner_list = [] 
+most_votes = int(0)
+projected_winner = str(" ")
+official_winner = str(" ")
+
 # Define names as string for comparison
 khan = str("Khan")
 correy = str("Correy")
@@ -30,6 +36,8 @@ kahn_percent = float(0)
 correy_percent = float(0)
 li_percent = float(0)
 otooley_percent = float(0)
+
+
 
 
 # Set up the path to find the .csv file to be used with the program.
@@ -78,6 +86,25 @@ with open(csvpath, 'r') as csvfile:
     otooley_percent =  (otooley_total_votes / total_votes) * 100
     otooley_percent =  round(otooley_percent,3) 
 
+
+# Determine the winner
+winner_list = {
+    khan_total_votes: 'Khan',
+    correy_total_votes: 'Correy' ,
+    li_total_votes: 'Li',
+    otooley_total_votes: "O'Tooley" 
+}
+
+# identify the highest vote count.
+
+most_votes = (max(winner_list))
+print(most_votes)
+
+# Based on the highest votes, identify the winner's name
+
+official_winner = winner_list.get(most_votes)
+print(official_winner)
+
 # Print the results to the screen
 print(f'Election Results')
 print(f'--------------------------------')
@@ -88,7 +115,7 @@ print(f'Correy: {correy_percent}%   ({correy_total_votes})')
 print(f'Li: {li_percent}%      ({li_total_votes})')
 print(f"O'Tooley: {otooley_percent}%  ({otooley_total_votes})")
 print(f'--------------------------------')
-print(f'Winner: ')
+print(f'Winner: {official_winner}')
 print(f'--------------------------------')
     
 # Print out to a text file    
@@ -103,5 +130,5 @@ with open(output_file, "w") as text_file:
         print("Li: ", li_percent, "%", "(", li_total_votes,")", file=open(output_file, "a"))
         print("O'Tooley: ", otooley_percent, "%", "(", otooley_total_votes,")", file=open(output_file, "a"))
         print("--------------------------------", file=open(output_file, "a"))
-        print("Winner: ", file=open(output_file, "a")) 
+        print("Winner: ", official_winner, file=open(output_file, "a")) 
         print("--------------------------------", file=open(output_file, "a"))
