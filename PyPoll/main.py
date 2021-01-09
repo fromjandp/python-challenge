@@ -66,18 +66,17 @@ with open(csvpath, 'r') as csvfile:
     total_votes = len(voter_id) - 1
 
     #  Each candidate's % of total votes
-    khan_percent =  khan_total_votes / total_votes
+    khan_percent =  (khan_total_votes / total_votes) * 100
     khan_percent =  round(khan_percent,3)
     
-    correy_percent =  correy_total_votes / total_votes
+    correy_percent =  (correy_total_votes / total_votes) * 100
     correy_percent =  round(correy_percent,3)
     
-    li_percent =  li_total_votes / total_votes
+    li_percent =  (li_total_votes / total_votes) * 100
     li_percent =  round(li_percent,3)
 
-    otooley_percent =  otooley_total_votes / total_votes
-    otooley_percent =  round(otooley_percent,3)
-       
+    otooley_percent =  (otooley_total_votes / total_votes) * 100
+    otooley_percent =  round(otooley_percent,3) 
 
 # Print the results to the screen
 print(f'Election Results')
@@ -87,10 +86,22 @@ print(f'--------------------------------')
 print(f'Khan: {khan_percent}%   ({khan_total_votes})')
 print(f'Correy: {correy_percent}%   ({correy_total_votes})')
 print(f'Li: {li_percent}%      ({li_total_votes})')
-print(f"O'Tooley: {otooley_percent}% ({otooley_total_votes})")
+print(f"O'Tooley: {otooley_percent}%  ({otooley_total_votes})")
 print(f'--------------------------------')
+print(f'Winner: ')
 print(f'--------------------------------')
     
-output_file = os.path.join("Analysis","election_results_analysis.txt")
-with open(output_file, "w") as text_file: 
-     print("Election Results", file=open(output_file, "w"))
+# Print out to a text file    
+# output_file = os.path.join("Analysis", "election_results_analysis.txt")
+# with open(output_file, "w") as text_file: 
+#         print("Election Results", file=open(output_file, "w"))
+#         print("--------------------------------", file=open(output_file, "a"))
+#         print("Total Votes", total_votes, file=open(output_file, "a"))
+#         print("--------------------------------", file=open(output_file, "a")))
+#         print("Khan: ", khan_percent, "%", "(", khan_total_votes,")", file=open(output_file, "a"))
+#         print("Correy: ", correy_percent, "%", "(", correy_total_votes,")", file=open(output_file, "a"))
+#         print("Li: ", li_percent, "%", "(", li_total_votes,")", file=open(output_file, "a"))
+#         print("O'Tooley: ", otooley_percent, "%", "(", otooley_total_votes,")", file=open(output_file, "a"))
+#         print("--------------------------------", file=open(output_file, "a"))
+#         print("Winner: ", file=open(output_file, "w")) 
+#         print("--------------------------------", file=open(output_file, "a"))
