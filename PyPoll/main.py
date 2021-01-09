@@ -46,7 +46,7 @@ with open(csvpath, 'r') as csvfile:
             county.append(row[1]),
             candidate.append(row[2])
         }
-    # Read through the candidate list and calculate the votes per candidate    
+    # Read through the candidate list and calculate the votes per    
     for name in candidate:
         
         candidate_name = name    
@@ -91,3 +91,6 @@ print(f"O'Tooley: {otooley_percent}% ({otooley_total_votes})")
 print(f'--------------------------------')
 print(f'--------------------------------')
     
+output_file = os.path.join("Analysis","election_results_analysis.txt")
+with open(output_file, "w") as text_file: 
+     print("Election Results", file=open(output_file, "w"))
