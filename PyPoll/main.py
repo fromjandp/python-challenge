@@ -1,4 +1,4 @@
-    # Import the module  to allow for Python to be able to use across machine operating systems
+# Import the module  to allow for Python to be able to use across machine operating systems
 import os
 
 # Import the module to read csv files in the program
@@ -15,7 +15,6 @@ candidate = []
 #Winner
 winner_list = [] 
 most_votes = int(0)
-projected_winner = str(" ")
 official_winner = str(" ")
 
 # Define names as string for comparison
@@ -36,9 +35,6 @@ kahn_percent = float(0)
 correy_percent = float(0)
 li_percent = float(0)
 otooley_percent = float(0)
-
-
-
 
 # Set up the path to find the .csv file to be used with the program.
 csvpath = os.path.join("Resources", "election_data.csv")
@@ -87,7 +83,7 @@ with open(csvpath, 'r') as csvfile:
     otooley_percent =  round(otooley_percent,3) 
 
 
-# Determine the winner
+# Determine the winner. need to identify the highest count before identifying the person who won.
 winner_list = {
     khan_total_votes: 'Khan',
     correy_total_votes: 'Correy' ,
@@ -96,16 +92,13 @@ winner_list = {
 }
 
 # identify the highest vote count.
-
 most_votes = (max(winner_list))
-print(most_votes)
 
 # Based on the highest votes, identify the winner's name
-
 official_winner = winner_list.get(most_votes)
-print(official_winner)
 
 # Print the results to the screen
+
 print(f'Election Results')
 print(f'--------------------------------')
 print(f'Total Votes: {total_votes}')  
@@ -119,6 +112,7 @@ print(f'Winner: {official_winner}')
 print(f'--------------------------------')
     
 # Print out to a text file    
+
 output_file = os.path.join("Analysis", "election_results_analysis.txt")
 with open(output_file, "w") as text_file: 
         print("Election Results", file=open(output_file, "w"))
